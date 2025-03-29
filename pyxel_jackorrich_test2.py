@@ -58,7 +58,6 @@ class App:
         if self.is_start_screen:
             if pyxel.btnp(pyxel.KEY_A):
                 self.is_start_screen = False
-            return
 
         if self.is_goal or self.is_game_over:
             if pyxel.btnp(pyxel.KEY_A) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
