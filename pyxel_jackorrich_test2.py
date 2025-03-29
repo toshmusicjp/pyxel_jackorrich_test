@@ -58,6 +58,7 @@ class App:
         if self.is_start_screen:
             if pyxel.btnp(pyxel.KEY_A):
                 self.is_start_screen = False
+            return
 
         if self.is_goal or self.is_game_over:
             if pyxel.btnp(pyxel.KEY_A) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_B):
@@ -160,22 +161,21 @@ class App:
 
     def draw(self):
         pyxel.cls(0)
-        pyxel.camera()
-        pyxel.bltm(0, 0, 0, self.scroll_x, self.scroll_y, pyxel.width, pyxel.height, 0)
-        pyxel.camera(self.scroll_x, self.scroll_y)
-        pyxel.blt(self.x, self.y, 0, 0, 8, self.pldir * 8, 8, 0)
-
-        # 画面右上にスコアと残り時間表示
-        pyxel.text(self.scroll_x + pyxel.width - 50, self.scroll_y + 5, f"SCORE: {self.score}", 7)
-        pyxel.text(self.scroll_x + pyxel.width - 40, self.scroll_y + 15, f"TIME: {self.time_left}", 7)
-
-        # ゲーム終了時のメッセージ表示
-        if self.is_goal:
-            pyxel.text(self.scroll_x + 45, self.scroll_y + 56, "YOU WIN!" if self.score > 0 else "YOU LOSE!", 7)
-        elif self.is_game_over:
-            pyxel.text(self.scroll_x + 45, self.scroll_y + 56, "GAME OVER!", 7)
-
-        if self.is_goal or self.is_game_over:
-            pyxel.text(self.scroll_x + 30, self.scroll_y + 70, "PRESS A KEY TO RESTART", 7)
+        if self.is_start_screen:
+            pyxel.blt(0, 0, 1, 0, 0, 128, 128)
+            pyxel.text(40, 100, "PRESS A TO START", pyxel.frame_count % 16)
+        else:
+            pyxel.camera()
+            pyxel.bltm(0, 0, 0, self.scroll_x, self.scroll_y, pyxel.width, pyxel.height, 0)
+            pyxel.camera(self.scroll_x, self.scroll_y)
+            pyxel.blt(self.x, self.y, 0, 0, 8, self.pldir * 8, 8, 0)
+            pyxel.text(self.scroll_x + pyxel.width - 50, self.scroll_y + 5, f"SCORE: {self.score}", 7)
+            pyxel.text(self.scroll_x + pyxel.width - 40, self.scroll_y + 15, f"TIME: {self.time_left}", 7)
+            
+            if self.is_goal:
+                pyxel.text(self.scroll_x + 45, self.scroll_y + 56, "YOU WIN!" if self.score > 0 else "YOU LOSE!", 7)
+            elif self.is_game_over:
+                pyxel.text(self.scroll_x + 45, self.scroll_y + 56, "GAME OVER!", 7)
+                pyxel.text(self.scroll_x + 30, self.scroll_y + 70, "PRESS A TO RESTART", 7)
 
 App()
