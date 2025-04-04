@@ -73,7 +73,7 @@ class App:
         # タイマー更新
         if pyxel.frame_count % 30 == 0:
             self.time_left -= 1
-            if self.time_left <= 1:
+            if self.time_left <= 0:
                 self.is_game_over = True
                 pyxel.play(1, 12, loop=False)
 
@@ -169,16 +169,16 @@ class App:
             pyxel.bltm(0, 0, 0, self.scroll_x, self.scroll_y, pyxel.width, pyxel.height, 0)
             pyxel.camera(self.scroll_x, self.scroll_y)
             pyxel.blt(self.x, self.y, 0, 0, 8, self.pldir * 8, 8, 0)
-            pyxel.text(self.scroll_x + pyxel.width - 50, self.scroll_y + 5, f"SCORE: {self.score}", 7)
-            pyxel.text(self.scroll_x + pyxel.width - 40, self.scroll_y + 15, f"TIME: {self.time_left}", 7)
+            pyxel.text(self.scroll_x + pyxel.width - 50, self.scroll_y + 5, f"SCORE: {self.score}", 1)
+            pyxel.text(self.scroll_x + pyxel.width - 40, self.scroll_y + 15, f"TIME: {self.time_left}", 1)
             
         # ゲーム終了時のメッセージ表示
         if self.is_goal:
-            pyxel.text(self.scroll_x + 45, self.scroll_y + 56, "YOU WIN!" if self.score > 0 else "YOU LOSE!", 7)
+            pyxel.text(self.scroll_x + 45, self.scroll_y + 56, "YOU WIN!" if self.score > 0 else "YOU LOSE!", 8)
         elif self.is_game_over:
-            pyxel.text(self.scroll_x + 45, self.scroll_y + 56, "GAME OVER!", 7)
+            pyxel.text(self.scroll_x + 45, self.scroll_y + 56, "GAME OVER!", 8)
 
         if self.is_goal or self.is_game_over:
-            pyxel.text(self.scroll_x + 30, self.scroll_y + 70, "PRESS A KEY TO RESTART", 7)
+            pyxel.text(self.scroll_x + 20, self.scroll_y + 70, "PRESS A KEY TO RESTART", 8)
 
 App()
