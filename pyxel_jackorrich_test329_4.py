@@ -163,8 +163,7 @@ class App:
         pyxel.cls(0)
         if self.is_start_screen:
             pyxel.blt(0, 0, 1, 0, 0, 128, 128)
-            pyxel.text(35, 56, "JACK OR RICH", 7)
-            pyxel.text(30, 100, "PRESS A TO START", pyxel.frame_count % 16)
+            pyxel.text(30, 56, "PRESS A TO START", pyxel.frame_count % 16)
         else:
             pyxel.camera()
             pyxel.bltm(0, 0, 0, self.scroll_x, self.scroll_y, pyxel.width, pyxel.height, 0)
